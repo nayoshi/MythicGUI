@@ -1,0 +1,18 @@
+main: "dev.nayo.mythicgui.MythicGUI"
+name: "MythicGUI"
+version: "2.0"
+api-version: "1.16"
+description: "Easy way to access mythic mob items through a gui"
+author: "nayoshi"
+depend: ["MythicMobs"]
+commands:
+  mythicmobgui:
+    description: "The main command of the plugin"
+    aliases: ['mmgui','mmg']
+    permission: "mythicgui.access"
+    permission-message: "You do not have permission to access this command."
+permissions:
+  mythicgui.access:
+    description: "allows access to mythic mobs gui"
+    default: "op"
+

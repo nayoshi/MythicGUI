@@ -2,10 +2,9 @@ package dev.nayo.mythicgui;
 
 import io.lumine.xikage.mythicmobs.adapters.bukkit.BukkitAdapter;
 import io.lumine.xikage.mythicmobs.items.MythicItem;
-import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
+// DisplayItem holds all the MythicItem and creates the item for display
 public class DisplayItem {
     private String name;
     private MythicItem mythicItem;

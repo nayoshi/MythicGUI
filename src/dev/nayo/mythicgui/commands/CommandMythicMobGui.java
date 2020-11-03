@@ -1,5 +1,6 @@
 package dev.nayo.mythicgui.commands;
 
+import dev.nayo.mythicgui.helper.StringHelper;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,13 +25,13 @@ public class CommandMythicMobGui implements CommandExecutor {
             if(cmd != null) {
                 if(commandSender instanceof ConsoleCommandSender) {
                     if(!cmd.isConsoleExecutable()) {
-                        commandSender.sendMessage("no");
+                        commandSender.sendMessage(StringHelper.print("Nope"));
                         return true;
                     }
                 }
                 cmd.execute(commandSender, args);
             } else {
-                commandSender.sendMessage("argument not valid");
+                commandSender.sendMessage(StringHelper.print("Invalid Argument. (item/config/reload)."));
             }
         } else {
             commandMap.get("config").execute(commandSender,args);

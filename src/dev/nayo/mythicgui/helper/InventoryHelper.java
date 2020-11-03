@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryHelper {
+
+    //Creates the inventories for the plugin
     public static Inventory updateInventory(Inventory inv, DisplayConfig displayConfig, int size, int pageNum) {
         inv.clear();
 
@@ -24,14 +26,14 @@ public class InventoryHelper {
         int itemL = itemLimit;
         int itemIndex = itemLimit * pageNum;
         int endingIndex = itemLimit * (pageNum + 1);
-
         List<String> items = displayConfig.getItemNames();
+
         if (items.size() <= endingIndex) {
             itemL = endingIndex - items.size();
+            itemL = itemLimit - itemL;
         }
-        if(itemL > items.size()) {
-            itemL = items.size() - 1;
-        }
+
+        System.out.println(itemLimit + " " + itemL + " " + itemIndex + " " + endingIndex + " " + items.size());
 
         for (int i = 0; i < itemL; i++) {
             MythicItem mi = displayConfig.getItem(items.get(i + itemIndex)).getMythicItem();
@@ -45,10 +47,11 @@ public class InventoryHelper {
         ItemStack page = new ItemStack(Material.PINK_STAINED_GLASS_PANE);
         ItemMeta pageMeta = page.getItemMeta();
         pageMeta.setLocalizedName(displayConfig.getName() + ":" + pageNum);
-        pageMeta.setDisplayName(StringHelper.format("Return To Config Page"));
+        pageMeta.setDisplayName(StringHelper.format("&r&fReturn To Config Page"));
+
         List<String> lore = new ArrayList<>();
-        lore.add(StringHelper.format("&r" + itemL + "/" + items.size()));
         lore.add(ChatColor.RESET + "Page " + (pageNum + 1));
+
         pageMeta.setLore(lore);
         page.setItemMeta(pageMeta);
         inv.setItem(size - 5, page);
@@ -88,6 +91,17 @@ public class InventoryHelper {
             item.setItemMeta(itemMeta);
             inv.addItem(item);
         }
+        ItemStack nayoHead = new ItemStack(Material.PLAYER_HEAD);
+        Bukkit.getUnsafe().modifyItemStack(nayoHead, "{SkullOwner:{Id:[I;-657158004,-1808708937,-1827101785,-1708230178],Properties:{textures:[{Value:\"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzk3YjkxZjdhN2FjMWMzOWVhYzIxZDA2Nzg4Mjg4MzU4ZTIxMWFlZjIzYzBiNDAyMWY5ODNkOGRjNTU5YmQwYiJ9fX0=\"}]}}}");
+        ItemMeta nayoMeta = nayoHead.getItemMeta();
+        nayoMeta.setDisplayName(StringHelper.format("&r&6Mythic Item Browser"));
+        nayoMeta.setLocalizedName("nayo");
+        List<String> lore = new ArrayList<>();
+        lore.add(StringHelper.format("&r&3Author: mayo :P"));
+        lore.add(StringHelper.format("&r&8imagine writing plugins for a server xdddd"));
+        nayoMeta.setLore(lore);
+        nayoHead.setItemMeta(nayoMeta);
+        inv.setItem(size-5, nayoHead);
         return inv;
     }
     public static Inventory createConfigInventory(Player player, List<String> str, int size) {
